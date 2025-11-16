@@ -6,7 +6,7 @@ import PcBuilder from "../store/PcBuilderStore";
 const currency = (n) => `BDT. ${(n ?? 0).toLocaleString("en-BD")}`;
 
 const PcBuilderPage = () => {
-    // --- Store state ---
+    // --- store state ---
     const prices   = PcBuilder((s) => s.prices);
     const fanSlots = PcBuilder((s) => s.fanSlots);
     const gpuSlot  = PcBuilder((s) => s.gpuSlot);
