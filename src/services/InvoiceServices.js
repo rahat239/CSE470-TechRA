@@ -58,7 +58,7 @@ const CreateInvoiceService = async (req) => {
 
 
 
-// =============Step 04: Create Invoice=====================================================================================
+// =============Step 04: Create invoice=====================================================================================
 
     let createInvoice=await InvoiceModel.create({
         userID:user_id,
@@ -76,7 +76,7 @@ const CreateInvoiceService = async (req) => {
 
 
 
-// =============Step 05: Create Invoice Product=====================================================================================
+// =============Step 05: Create invoice Product=====================================================================================
     let invoice_id=createInvoice['_id'];
 
     CartProducts.forEach(async (element)=>{
@@ -135,10 +135,10 @@ const CreateInvoiceService = async (req) => {
     form.append('ship_country',Profile[0]['ship_country'])
     form.append('ship_postcode',Profile[0]['ship_postcode'])
 
-    form.append('product_name','According Invoice')
-    form.append('product_category','According Invoice')
-    form.append('product_profile','According Invoice')
-    form.append('product_amount','According Invoice')
+    form.append('product_name','According invoice')
+    form.append('product_category','According invoice')
+    form.append('product_profile','According invoice')
+    form.append('product_amount','According invoice')
 
     let SSLRes=await axios.post(PaymentSettings[0]['init_url'],form);
 

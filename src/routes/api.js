@@ -50,7 +50,7 @@ router.post('/UpdateCartList/:cartID',AuthVerification,CartListController.Update
 router.post('/RemoveCartList',AuthVerification,CartListController.RemoveCartList)
 router.get('/CartList',AuthVerification,CartListController.CartList)
 
-// Invoice & Payment
+// invoice & Payment
 router.get('/CreateInvoice',AuthVerification,InvoiceController.CreateInvoice)
 
 
@@ -138,7 +138,7 @@ router.post('/cart/update/:cartId', AuthVerification, CartListController.UpdateC
 router.post('/cart/remove', AuthVerification, CartListController.RemoveCartList);
 router.get('/cart', AuthVerification, CartListController.CartList);
 
-// --- Invoice & Payment ---
+// --- invoice & Payment ---
 router.get('/invoice/create', AuthVerification, InvoiceController.CreateInvoice);
 router.get('/invoice/list', AuthVerification, InvoiceController.InvoiceList);
 router.get('/invoice/products/:invoiceId', AuthVerification, InvoiceController.InvoiceProductList);
