@@ -260,3 +260,4 @@ exports.listSliders = async (req, res) => {
         res.status(500).json({ status: 'fail', message: 'Error fetching sliders' });
     }
 };
+

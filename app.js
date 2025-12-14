@@ -1,5 +1,5 @@
 const express = require("express");
-
+const router = require("./src/routes/api");
 const app = new express();
 
 const rateLimit = require("express-rate-limit");
@@ -11,7 +11,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const path = require("path");
-
+const aiRoute = require("./src/routes/aiRoute");
 
 // --- DB ---
 let URL =
@@ -60,6 +60,8 @@ app.set("etag", false);
 app.get("/api/v1/test", (req, res) => {
     res.json({ message: "API is working!" });
 });
+app.use("/api/v1/ai", aiRoute);
+app.use("/api/v1", router);
 
 // --- Serve React build ---
 const CLIENT_DIST = path.join(__dirname, "client", "dist"); // or "build" if CRA

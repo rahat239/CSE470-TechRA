@@ -25,7 +25,7 @@ const UserStore = create((set) => ({
     UserOTPRequest: async (email) => {
         console.log("OTP Request initiated for email:", email); // Debugging OTP request
         set({ isFormSubmit: true });
-        let res = await axios.get(/api/v1/UserOTP/${email});
+        let res = await axios.get(`/api/v1/UserOTP/${email}`);
         console.log("OTP Request Response:", res); // Debugging OTP response
         setEmail(email);
         set({ isFormSubmit: false });
@@ -36,7 +36,7 @@ const UserStore = create((set) => ({
     UserLogoutRequest: async () => {
         console.log("User logout initiated."); // Debugging logout
         set({ isFormSubmit: true });
-        let res = await axios.get(/api/v1/UserLogout);
+        let res = await axios.get(`/api/v1/UserLogout`);
         set({ isFormSubmit: false });
         console.log("Logout response:", res);
         return res.data['status'] === "success";
@@ -57,7 +57,7 @@ const UserStore = create((set) => ({
         set({ isFormSubmit: true });
         let email = getEmail();
         console.log("Verifying OTP for email:", email); // Debugging email before OTP verification
-        let res = await axios.get(/api/v1/VerifyLogin/${email}/${otp});
+        let res = await axios.get(`/api/v1/VerifyLogin/${email}/${otp}`);
         set({ isFormSubmit: false });
 
         if (res.data['status'] === "success") {
@@ -88,7 +88,7 @@ const UserStore = create((set) => ({
     ProfileDetails: null,
     ProfileDetailsRequest: async () => {
         try {
-            let res = await axios.get(/api/v1/ReadProfile);
+            let res = await axios.get(`/api/v1/ReadProfile`);
             if (res.data['data'].length > 0) {
                 set({ ProfileDetails: res.data['data'][0] });
                 set({ ProfileForm: res.data['data'][0] });
@@ -103,7 +103,7 @@ const UserStore = create((set) => ({
     ProfileSaveRequest: async (PostBody) => {
         try {
             set({ ProfileDetails: null });
-            let res = await axios.post(/api/v1/UpdateProfile, PostBody);
+            let res = await axios.post(`/api/v1/UpdateProfile`, PostBody);
             return res.data['status'] === "success";
         } catch (e) {
             unauthorized(e.response.status);
