@@ -8,7 +8,7 @@ const WishStore=create((set)=>({
     WishSaveRequest:async(productID)=>{
         try {
             set({isWishSubmit:true})
-            let res=await axios.post(/api/v1/SaveWishList, {productID:productID});
+            let res=await axios.post(`/api/v1/SaveWishList`, {productID:productID});
             return res.data['status'] === "success";
         }catch (e) {
             unauthorized(e.response.status)
@@ -21,7 +21,7 @@ const WishStore=create((set)=>({
     WishCount:0,
     WishListRequest:async()=>{
         try {
-            let res=await axios.get(/api/v1/WishList);
+            let res=await axios.get(`/api/v1/WishList`);
             set({WishList:res.data['data']})
             set({WishCount:(res.data['data']).length})
         }catch (e) {
@@ -33,7 +33,7 @@ const WishStore=create((set)=>({
     RemoveWishListRequest:async(productID)=>{
         try {
             set({WishList:null})
-            await axios.post(/api/v1/RemoveWishList,{"productID":productID});
+            await axios.post(`/api/v1/RemoveWishList`,{"productID":productID});
         }catch (e) {
             unauthorized(e.response.status)
         }
