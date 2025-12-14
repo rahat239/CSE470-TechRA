@@ -16,8 +16,8 @@ const InvoiceDetails = () => {
 
     let {ReviewFormData,ReviewFormOnChange,ReviewSaveRequest}=ReviewStore()
     const ReviewModal=(id)=>{
-        setShow(true);
-        ReviewFormOnChange('productID',id)
+       setShow(true);
+       ReviewFormOnChange('productID',id)
     }
 
     const {id}=useParams();
@@ -26,7 +26,7 @@ const InvoiceDetails = () => {
 
     useEffect(() => {
         (async ()=>{
-            await InvoiceDetailsRequest(id);
+           await InvoiceDetailsRequest(id);
         })()
     }, [id]);
 

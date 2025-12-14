@@ -12,16 +12,16 @@ const ProfileForm = () => {
             await ProfileDetailsRequest()
         })()
     }, []);
-
-
+    
+    
     const Save = async () => {
-        let res= await ProfileSaveRequest(ProfileForm);
-        if(res){
-            toast.success("Profile Updated")
-            await ProfileDetailsRequest();
-        }
+      let res= await ProfileSaveRequest(ProfileForm);
+      if(res){
+          toast.success("Profile Updated")
+          await ProfileDetailsRequest();
+      }
     }
-
+    
 
     if(ProfileDetails===null){
         return (

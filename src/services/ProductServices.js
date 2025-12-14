@@ -10,13 +10,13 @@ const ObjectId=mongoose.Types.ObjectId;
 
 
 const BrandListService = async () => {
-    try {
-        let data= await BrandModel.find();
-        return {status:"success",data:data}
-    }
-    catch (e) {
-        return {status:"fail",data:e}.toString()
-    }
+        try {
+           let data= await BrandModel.find();
+           return {status:"success",data:data}
+        }
+        catch (e) {
+            return {status:"fail",data:e}.toString()
+        }
 }
 
 const CategoryListService = async () => {
@@ -264,11 +264,11 @@ const CreateReviewService = async (req) => {
         let user_id=req.headers.user_id;
         let reqBody=req.body;
         let data=await ReviewModel.create({
-            productID:reqBody['productID'],
-            userID:user_id,
-            des:reqBody['des'],
-            rating:reqBody['rating'],
-        })
+             productID:reqBody['productID'],
+             userID:user_id,
+             des:reqBody['des'],
+             rating:reqBody['rating'],
+         })
         return {status:"success",data:data}
     }
     catch (e) {

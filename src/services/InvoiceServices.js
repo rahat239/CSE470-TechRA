@@ -58,7 +58,7 @@ const CreateInvoiceService = async (req) => {
 
 
 
-// =============Step 04: Create invoice=====================================================================================
+// =============Step 04: Create Invoice=====================================================================================
 
     let createInvoice=await InvoiceModel.create({
         userID:user_id,
@@ -76,25 +76,25 @@ const CreateInvoiceService = async (req) => {
 
 
 
-// =============Step 05: Create invoice Product=====================================================================================
-    let invoice_id=createInvoice['_id'];
+// =============Step 05: Create Invoice Product=====================================================================================
+        let invoice_id=createInvoice['_id'];
 
-    CartProducts.forEach(async (element)=>{
-        await InvoiceProductModel.create({
-            userID:user_id,
-            productID:element['productID'],
-            invoiceID:invoice_id,
-            qty:element['qty'],
-            price:element['product']['discount']?element['product']['discountPrice']:element['product']['price'],
-            color:element['color'],
-            size:element['size']
+        CartProducts.forEach(async (element)=>{
+            await InvoiceProductModel.create({
+                userID:user_id,
+                productID:element['productID'],
+                invoiceID:invoice_id,
+                qty:element['qty'],
+                price:element['product']['discount']?element['product']['discountPrice']:element['product']['price'],
+                color:element['color'],
+                size:element['size']
+            });
         });
-    });
 
 
 
 //=============Step 06: Remove Carts=====================================================================================
-    await  CartModel.deleteMany({userID:user_id});
+        await  CartModel.deleteMany({userID:user_id});
 
 
 
@@ -135,10 +135,10 @@ const CreateInvoiceService = async (req) => {
     form.append('ship_country',Profile[0]['ship_country'])
     form.append('ship_postcode',Profile[0]['ship_postcode'])
 
-    form.append('product_name','According invoice')
-    form.append('product_category','According invoice')
-    form.append('product_profile','According invoice')
-    form.append('product_amount','According invoice')
+    form.append('product_name','According Invoice')
+    form.append('product_category','According Invoice')
+    form.append('product_profile','According Invoice')
+    form.append('product_amount','According Invoice')
 
     let SSLRes=await axios.post(PaymentSettings[0]['init_url'],form);
 
@@ -212,20 +212,20 @@ const InvoiceListService = async (req)=>{
 
 
 const InvoiceProductListService = async (req)=>{
-    try{
+   try{
 
-        let user_id=new ObjectID(req.headers.user_id);
-        let invoice_id=new ObjectID(req.params.invoice_id);
+       let user_id=new ObjectID(req.headers.user_id);
+       let invoice_id=new ObjectID(req.params.invoice_id);
 
-        let matchStage={$match:{userID:user_id,invoiceID:invoice_id}}
-        let JoinStageProduct={$lookup:{from:"products",localField:"productID",foreignField:"_id",as:"product"}}
-        let unwindStage={$unwind:"$product"}
+       let matchStage={$match:{userID:user_id,invoiceID:invoice_id}}
+       let JoinStageProduct={$lookup:{from:"products",localField:"productID",foreignField:"_id",as:"product"}}
+       let unwindStage={$unwind:"$product"}
 
-        let products=await InvoiceProductModel.aggregate([
-            matchStage,
-            JoinStageProduct,
-            unwindStage
-        ])
+       let products=await InvoiceProductModel.aggregate([
+           matchStage,
+           JoinStageProduct,
+           unwindStage
+       ])
 
 
         return {status:"success",data: products}

@@ -18,7 +18,7 @@ const ReviewStore=create((set)=>({
     ReviewSaveRequest:async(PostBody)=>{
         try {
             set({isReviewSubmit:true})
-            let res=await axios.post(/api/v1/CreateReview,PostBody);
+            let res=await axios.post(`/api/v1/CreateReview`,PostBody);
             return res.data['status'] === "success";
         }catch (e) {
             unauthorized(e.response.status)

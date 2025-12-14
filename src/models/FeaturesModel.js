@@ -8,3 +8,5 @@ const DataSchema=mongoose.Schema({
 )
 const FeaturesModel=mongoose.model('features',DataSchema)
 module.exports=FeaturesModel
+
+
